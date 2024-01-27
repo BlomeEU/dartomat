@@ -2,5 +2,7 @@
 
 public class Leg
 {
-    public Throw[] Throws { get; set; }
+    public PlayerRound[] Rounds { get; set; }
 }
+
+public record PlayerRound(Player Player, Round Round);
