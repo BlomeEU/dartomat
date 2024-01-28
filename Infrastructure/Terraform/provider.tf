@@ -4,6 +4,10 @@ terraform {
       source = "hashicorp/azurerm"
       version = "3.89.0"
     }
+    azuread = {
+      source = "hashicorp/azuread"
+      version = "2.47.0"
+    }
   }
   backend "azurerm" {
       resource_group_name  = "tfstate"
@@ -19,4 +23,10 @@ provider "azurerm" {
   features {
     
   }
+}
+
+provider "azuread" {
+  # Configuration options
+  # this is kind of trashy, because the TenantID is only available AFTER the b2c is created
+  tenant_id = "24f3c555-28a6-404e-8b4b-43b89077a2be"
 }
