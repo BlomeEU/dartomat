@@ -1,4 +1,4 @@
-﻿namespace Maui;
+﻿namespace Presentation.Maui;
 
 public partial class MainPage : ContentPage
 {

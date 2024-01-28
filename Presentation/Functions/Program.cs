@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Presentation.Functions;
 using MassTransit;
-using Dartomat.Core.Services.Consumers;
+using Dartomat.Core.Services.Consumers.Events;
 
 var host = new HostBuilder()
     .ConfigureFunctionsWebApplication()

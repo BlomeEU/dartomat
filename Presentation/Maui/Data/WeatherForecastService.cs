@@ -1,4 +1,4 @@
-namespace Maui.Data;
+namespace Presentation.Maui.Data;
 
 public class WeatherForecastService
 {

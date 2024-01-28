@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace Maui;
+namespace Presentation.Maui;
 
 public class Program
 {
