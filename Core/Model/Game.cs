@@ -3,6 +3,7 @@
 public class Game
 {
     public Guid Id { get; set; }
+    public DateTime PlayedAt { get; set; }
 
     public Player[] Players { get; set; }
     public Set[] Sets { get; set; }

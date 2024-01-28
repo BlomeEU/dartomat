@@ -1,5 +1,11 @@
 using System.Net;
+
+using Dartomat.Core.Contracts;
 using Dartomat.Core.Domain;
+using Dartomat.Core.Services.Contracts;
+
+using MassTransit;
+using MassTransit.Mediator;
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,14 +19,8 @@ using FromBodyAttribute = Microsoft.Azure.Functions.Worker.Http.FromBodyAttribut
 
 namespace Dartomat.Presentation.Functions.GameHistory
 {
-    public class GetGameHistory
+    public class GetGameHistory(ILogger<GetGameHistory> logger, IBus bus, IMediator mediator)
     {
-        private readonly ILogger<GetGameHistory> _logger;
-
-        public GetGameHistory(ILogger<GetGameHistory> logger)
-        {
-            _logger = logger;
-        }
 
 
         //// Add these three attribute classes below
@@ -32,7 +32,7 @@ namespace Dartomat.Presentation.Functions.GameHistory
         [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.MethodNotAllowed, Summary = "Validation exception", Description = "Validation exception")]
         public IActionResult Get([HttpTrigger(AuthorizationLevel.Function, "get", Route = "api/game")] HttpRequest req)
         {
-            _logger.LogInformation("C# HTTP trigger function processed a request.");
+            logger.LogInformation("C# HTTP trigger function processed a request.");
             return new OkObjectResult("Welcome to Azure Functions!");
         }
 
@@ -44,10 +44,13 @@ namespace Dartomat.Presentation.Functions.GameHistory
         [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.BadRequest, Summary = "Invalid ID supplied", Description = "Invalid ID supplied")]
         [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.NotFound, Summary = "Pet not found", Description = "Pet not found")]
         [OpenApiResponseWithoutBody(statusCode: HttpStatusCode.MethodNotAllowed, Summary = "Validation exception", Description = "Validation exception")]
-        public IActionResult Post([HttpTrigger(AuthorizationLevel.Function, "post", Route = "api/game")] HttpRequest req, [FromBody] Game game)
+        public async Task<IActionResult> PostAsync([HttpTrigger(AuthorizationLevel.Function, "post", Route = "api/game")] HttpRequest req, [FromBody] Game game)
         {
-            _logger.LogInformation("C# HTTP trigger function processed a request.");
-            return new OkObjectResult(game);
+            logger.LogInformation("C# HTTP trigger function processed a request.");
+
+            //await mediator.Send(new GamePlayed { Game = game });
+            var client = mediator.CreateRequestClient<GamePlayed>();
+            return new OkObjectResult(await client.GetResponse<GamePlayed>(new GamePlayed { Game = game}));
         }
     }
 }
