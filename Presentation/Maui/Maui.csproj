@@ -58,4 +58,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="$(MauiVersion)" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SharedUI\SharedUI.csproj" />
+  </ItemGroup>
+
 </Project>

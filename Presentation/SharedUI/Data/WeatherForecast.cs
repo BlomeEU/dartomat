@@ -1,4 +1,4 @@
-namespace Presentation.Maui.Data;
+namespace Presentation.SharedUI.Data;
 
 public class WeatherForecast
 {

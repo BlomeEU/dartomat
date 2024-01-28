@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
-using Presentation.Maui.Data;
+
+using Presentation.SharedUI.Data;
 
 namespace Presentation.Maui;
 

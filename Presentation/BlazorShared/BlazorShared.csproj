@@ -1,10 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net8.0-android;net8.0-ios;net8.0-maccatalyst;</TargetFrameworks>
-    <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows</TargetFrameworks>
+    <TargetFrameworks>net8.0;</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <RootNamespace>Presentation.BlazorShared</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Main.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Main.razor" />
+  </ItemGroup>
 
 </Project>
